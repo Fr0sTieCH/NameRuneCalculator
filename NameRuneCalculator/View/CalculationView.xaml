@@ -1,0 +1,124 @@
+﻿<UserControl x:Class="NameRuneCalculator.View.CalculationView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:helpers="clr-namespace:NameRuneCalculator.Helpers"
+             xmlns:local="clr-namespace:NameRuneCalculator.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
+
+  <UserControl.Resources>
+    <helpers:ColorToBrushConverter x:Key="ColorToBrushConverter" />
+  </UserControl.Resources>
+
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="40"/>
+      <RowDefinition Height="*"/>
+      <RowDefinition Height="100"/>
+    </Grid.RowDefinitions>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="25"/>
+      <ColumnDefinition Width="50*"/>
+      <ColumnDefinition Width="50*"/>
+      <ColumnDefinition Width="25"/>
+    </Grid.ColumnDefinitions>
+
+    <!--Name Input Field-->
+    <materialDesign:Card Margin="2,2,2,2" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="1">
+      <TextBox x:Name="NameTextBox"
+                   materialDesign:HintAssist.HelperText="{helpers:Loc Key=Name}"
+                   materialDesign:HintAssist.Hint="{helpers:Loc Key=Name}" Margin="2,2,2,2">
+
+        <TextBox.Text>
+          <Binding Path="NameInput" UpdateSourceTrigger="PropertyChanged">
+          </Binding>
+        </TextBox.Text>
+      </TextBox>
+    </materialDesign:Card>
+
+    <!--FamilyName Input Field-->
+    <materialDesign:Card Margin="2,2,2,2" Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="1">
+      <TextBox x:Name="FamilyTextBox"
+                   materialDesign:HintAssist.HelperText="{helpers:Loc Key=Familyname}"
+                   materialDesign:HintAssist.Hint="{helpers:Loc Key=Familyname}" Margin="2,2,2,2">
+        <TextBox.Text>
+          <Binding Path="FamilyNameInput" UpdateSourceTrigger="PropertyChanged">
+          </Binding>
+        </TextBox.Text>
+      </TextBox>
+    </materialDesign:Card>
+
+    <ScrollViewer Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2">
+    <ItemsControl  ItemsSource="{Binding FullNameCharacters}">
+      <ItemsControl.ItemsPanel>
+        <ItemsPanelTemplate>
+          <StackPanel Orientation="Vertical" />
+        </ItemsPanelTemplate>
+      </ItemsControl.ItemsPanel>
+      <ItemsControl.ItemTemplate>
+        <DataTemplate>
+          <materialDesign:Card Margin="2,2,2,2">
+            <Grid>
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="30" />
+                <ColumnDefinition Width="30" />
+                <ColumnDefinition Width="100" />
+                <ColumnDefinition Width="50" />
+                <ColumnDefinition Width="*" />
+              </Grid.ColumnDefinitions>
+              <TextBlock Grid.Column="0" Text="{Binding AlphaChar}" HorizontalAlignment="Center" FontWeight="Bold"/>
+              <TextBlock Grid.Column="1" Text="{Binding AlphaChar}" HorizontalAlignment="Center" FontFamily="/Fonts/#Elder Futhark" />
+              <TextBlock Grid.Column="2" Text="{Binding RuneName}" HorizontalAlignment="Left"  />
+              <Border Grid.Column="3" VerticalAlignment="Center"  CornerRadius="8" Background="{Binding Color, Converter={StaticResource ColorToBrushConverter}}">
+                <TextBlock Text="" Foreground="White" />
+              </Border>
+              <TextBlock Grid.Column="4" TextAlignment="Right" Text="{Binding Value}" Margin="0,0,10,0" />
+            </Grid>
+          </materialDesign:Card>
+        </DataTemplate>
+      </ItemsControl.ItemTemplate>
+    </ItemsControl>
+    </ScrollViewer>
+<!--TOTAL-->
+    <materialDesign:Card Padding="5,5,5,5" Margin="2,2,2,2" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="2">
+      <Grid>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="25"/>
+          <RowDefinition Height="25"/>
+          <RowDefinition Height="35"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="*" />
+          <ColumnDefinition Width="*" />
+          <ColumnDefinition Width="*" />
+          <ColumnDefinition Width="*" />
+          <ColumnDefinition Width="*" />
+          <ColumnDefinition Width="30" />
+        </Grid.ColumnDefinitions>
+        <TextBlock VerticalAlignment="Center" Grid.Column="0" Grid.Row="0" Text="{helpers:Loc Key=Name}" HorizontalAlignment="Left" FontWeight="Bold"/>
+        <TextBlock VerticalAlignment="Center" Grid.Column="1" Grid.Row="0" Text="{Binding NameInput}" HorizontalAlignment="Stretch" FontFamily="/Fonts/#Elder Futhark"/>
+        <TextBlock VerticalAlignment="Center" Grid.Column="4"  Grid.Row="0" TextAlignment="Right" Text="{Binding NameValue}"  />
+        <Button VerticalAlignment="Center" HorizontalAlignment="Left" Style="{StaticResource MaterialDesignToolButton}" Command="{Binding CopyNameValueCommand}" Grid.Column="5"  Grid.Row="0" >
+          <materialDesign:PackIcon Kind="ContentCopy" HorizontalContentAlignment="Left"/>
+        </Button>
+
+
+        <TextBlock VerticalAlignment="Center" Grid.Column="0" Grid.Row="1" Text="{helpers:Loc Key=Familyname}" HorizontalAlignment="Left" FontWeight="Bold" />
+        <TextBlock VerticalAlignment="Center" Grid.Column="1" Grid.Row="1" Text="{Binding FamilyNameInput}" HorizontalAlignment="Stretch" FontFamily="/Fonts/#Elder Futhark" />
+        <TextBlock VerticalAlignment="Center" Grid.Column="4"  Grid.Row="1" TextAlignment="Right" Text="{Binding FamilyNameValue}"  />
+        <Button VerticalAlignment="Center" HorizontalAlignment="Left" Style="{StaticResource MaterialDesignToolButton}" Command="{Binding CopyFamilyNameValueCommand}" Grid.Column="5"  Grid.Row="1" >
+          <materialDesign:PackIcon Kind="ContentCopy" HorizontalContentAlignment="Left"/>
+        </Button>
+
+        <TextBlock VerticalAlignment="Center" Grid.Column="0" Grid.Row="2" Text="Total" HorizontalAlignment="Left" FontWeight="Bold" FontSize="18"/>
+        <TextBlock VerticalAlignment="Center"  Grid.Column="4"  Grid.Row="2" TextAlignment="Right" Text="{Binding FullNameValue}"  FontSize="18" />
+        <Button VerticalAlignment="Center" HorizontalAlignment="Left" Style="{StaticResource MaterialDesignToolButton}" Command="{Binding CopyFullNameValueCommand}" Grid.Column="5"  Grid.Row="2" >
+          <materialDesign:PackIcon Kind="ContentCopy" HorizontalContentAlignment="Left"/>
+        </Button>
+      </Grid>
+    </materialDesign:Card>
+  </Grid>
+</UserControl>

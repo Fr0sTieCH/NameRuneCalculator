@@ -1,0 +1,63 @@
+﻿<UserControl x:Class="NameRuneCalculator.View.ConfigurationView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:NameRuneCalculator.View"
+             xmlns:helpers="clr-namespace:NameRuneCalculator.Helpers"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+  <UserControl.Resources>
+    <helpers:ColorConverter x:Key="ColorConverter" />
+  </UserControl.Resources>
+
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="50"/>
+      <RowDefinition Height="*"/>
+    </Grid.RowDefinitions>
+
+    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+      <Button Style="{StaticResource MaterialDesignIconButton}" Command="{Binding Save}">
+        <materialDesign:PackIcon Kind="ContentSave"/>
+      </Button>
+      <Button Style="{StaticResource MaterialDesignIconButton}" Command="{Binding UndoChanges}">
+        <materialDesign:PackIcon Kind="Undo"/>
+      </Button>
+      <Button Style="{StaticResource MaterialDesignIconButton}" Command="{Binding ResetToDefault}">
+        <materialDesign:PackIcon Kind="Restore"/>
+      </Button>
+    </StackPanel>
+
+    <ScrollViewer Grid.Row="1">
+      <ItemsControl  ItemsSource="{Binding Runes}" >
+        <ItemsControl.ItemsPanel>
+          <ItemsPanelTemplate>
+            <StackPanel Orientation="Vertical" />
+          </ItemsPanelTemplate>
+        </ItemsControl.ItemsPanel>
+        <ItemsControl.ItemTemplate>
+          <DataTemplate>
+            <materialDesign:Card Margin="2,2,2,2">
+              <Grid>
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition Width="30" />
+                  <ColumnDefinition Width="30" />
+                  <ColumnDefinition Width="100" />
+                  <ColumnDefinition Width="*" />
+                  <ColumnDefinition Width="100" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Text="{Binding AlphaChar}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontFamily="/Fonts/#Elder Futhark" />
+                <TextBlock Grid.Column="1" Text="{Binding AlphaChar}" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+                <TextBlock Grid.Column="2" Text="{Binding RuneName}" HorizontalAlignment="Stretch"  VerticalAlignment="Center" />
+                <materialDesign:ColorPicker  Grid.Column="3" HorizontalAlignment="Stretch" Color="{Binding Color, Converter={StaticResource ColorConverter}}"/>
+                <TextBox Grid.Column="4" PreviewTextInput="AllowOnlyNumericInput" VerticalAlignment="Center" TextAlignment="Right" Text="{Binding Value}" Margin="0,0,10,0" />
+              </Grid>
+            </materialDesign:Card>
+          </DataTemplate>
+        </ItemsControl.ItemTemplate>
+      </ItemsControl>
+    </ScrollViewer>
+  </Grid>
+</UserControl>
