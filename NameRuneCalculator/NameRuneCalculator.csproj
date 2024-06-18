@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <None Remove="Fonts\RUNE.TTF" />
+    <None Remove="Icon_256x256.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -31,6 +32,7 @@
 
   <ItemGroup>
     <Resource Include="Fonts\RUNE.TTF" />
+    <Resource Include="Icon_256x256.png" />
   </ItemGroup>
 
   <ItemGroup>
