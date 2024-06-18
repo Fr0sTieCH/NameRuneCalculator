@@ -85,7 +85,6 @@ namespace NameRuneCalculator.ViewModel
     {
       OnPropertyChanged(nameof(Runes));
       OnPropertyChanged(nameof(SelectedLanguage));
-      // Add other properties that need to be refreshed
     }
 
     private void SaveSettings()
