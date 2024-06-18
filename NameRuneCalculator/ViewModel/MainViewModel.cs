@@ -1,5 +1,5 @@
-﻿using GalaSoft.MvvmLight.CommandWpf;
-using NameRuneCalculator.Configuration;
+﻿using NameRuneCalculator.Configuration;
+using NameRuneCalculator.Helpers;
 using NameRuneCalculator.View;
 using System.Windows.Controls;
 using System.Windows.Input;

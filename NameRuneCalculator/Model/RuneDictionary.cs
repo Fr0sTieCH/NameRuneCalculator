@@ -6,7 +6,7 @@ namespace NameRuneCalculator.Model
 {
   public class RuneDictionary
   {
-    private Dictionary<char, RuneValue> _runeDictionary;
+    private Dictionary<char, RuneValue> _runeDictionary = new Dictionary<char, RuneValue>();
 
     public RuneDictionary(IEnumerable<RuneValue> values)
     {

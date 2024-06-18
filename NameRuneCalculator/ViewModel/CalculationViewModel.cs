@@ -1,5 +1,4 @@
-﻿using GalaSoft.MvvmLight.Command;
-using NameRuneCalculator.Configuration;
+﻿using NameRuneCalculator.Configuration;
 using NameRuneCalculator.Helpers;
 using NameRuneCalculator.Model;
 using System.Collections.ObjectModel;
