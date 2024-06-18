@@ -1,5 +1,5 @@
 # NameRuneCalculator
-**Languages:** [English](README.md) | [Deutsch](README.de.md) | [Español](README.es.md)
+**Languages:** [English](README.md) | [Deutsch](README.de.md)
 
 NameRuneCalculator (NRC) calculates the rune cross sum of any given name and provides the color of any rune.
 
