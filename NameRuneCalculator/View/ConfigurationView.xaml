@@ -10,15 +10,19 @@
              d:DesignHeight="450" d:DesignWidth="800">
   <UserControl.Resources>
     <helpers:ColorConverter x:Key="ColorConverter" />
+    <helpers:LanguageNameConverter x:Key="LanguageNameConverter" />
   </UserControl.Resources>
 
   <Grid>
     <Grid.RowDefinitions>
       <RowDefinition Height="50"/>
+      <RowDefinition Height="110"/>
       <RowDefinition Height="*"/>
     </Grid.RowDefinitions>
 
-    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+
+<!--SaveUndoResetMenu-->
+    <StackPanel  Orientation="Horizontal" HorizontalAlignment="Right">
       <Button Style="{StaticResource MaterialDesignIconButton}" Command="{Binding Save}">
         <materialDesign:PackIcon Kind="ContentSave"/>
       </Button>
@@ -29,8 +33,27 @@
         <materialDesign:PackIcon Kind="Restore"/>
       </Button>
     </StackPanel>
-
-    <ScrollViewer Grid.Row="1">
+<!--SettingsCard-->
+    <materialDesign:Card  Grid.Row="1" Width="300" Margin="2"  Padding="5,5,5,5">
+      <StackPanel>
+        <Label Content="{helpers:Loc Key=Settings}" HorizontalAlignment="Center"/>
+        <Separator Margin="5"/>
+        <CheckBox Content="{helpers:Loc Key=AutoNormalizeCharacters}" IsChecked="{Binding AutoNormalizeStrings, Mode=TwoWay}" FontSize="10" Margin="2"/>
+        <ComboBox Width="100" HorizontalAlignment="Left" Margin="2" 
+                  materialDesign:HintAssist.Hint="{helpers:Loc Key=Lang}" 
+                  HorizontalContentAlignment="Center"
+                  ItemsSource="{Binding Languages}"
+                  SelectedItem="{Binding SelectedLanguage, Mode=TwoWay}">
+          <ComboBox.ItemTemplate>
+            <DataTemplate>
+              <TextBlock Text="{Binding Converter={StaticResource LanguageNameConverter}}"/>
+            </DataTemplate>
+          </ComboBox.ItemTemplate>
+        </ComboBox>
+      </StackPanel>
+    </materialDesign:Card>
+<!--RunesConfiguration-->
+    <ScrollViewer Grid.Row="2">
       <ItemsControl  ItemsSource="{Binding Runes}" >
         <ItemsControl.ItemsPanel>
           <ItemsPanelTemplate>

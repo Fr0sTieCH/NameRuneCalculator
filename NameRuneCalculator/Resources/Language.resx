@@ -117,10 +117,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AutoNormalizeCharacters" xml:space="preserve">
+    <value>Normalize Characters (ÖÜÉÀ =&gt; OUEA)</value>
+  </data>
+  <data name="English" xml:space="preserve">
+    <value>English</value>
+  </data>
   <data name="Familyname" xml:space="preserve">
     <value>Familyname</value>
   </data>
+  <data name="German" xml:space="preserve">
+    <value>German</value>
+  </data>
+  <data name="Lang" xml:space="preserve">
+    <value>Language</value>
+  </data>
   <data name="Name" xml:space="preserve">
-    <value>Name</value>
+    <value>Prename</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Settings</value>
   </data>
 </root>

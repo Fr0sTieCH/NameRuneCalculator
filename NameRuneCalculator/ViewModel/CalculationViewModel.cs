@@ -39,7 +39,7 @@ namespace NameRuneCalculator.ViewModel
           {
             value = value.NormalizeString();
           }
-          _nameInput = value;
+          _nameInput = value.ToLower();
           UpdateFullName();
           OnPropertyChanged();
         }
@@ -57,7 +57,8 @@ namespace NameRuneCalculator.ViewModel
           {
             value = value.NormalizeString();
           }
-          _familyNameInput = value;
+
+          _familyNameInput = value.ToLower();
           UpdateFullName();
           OnPropertyChanged();
         }

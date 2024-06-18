@@ -2,6 +2,7 @@
 using System;
 using System.Drawing;
 using System.Text.Json.Serialization;
+using System.Xml.Serialization;
 
 namespace NameRuneCalculator.Model
 {
@@ -19,9 +20,10 @@ namespace NameRuneCalculator.Model
         Color = value.Color
       };
     }
-
-    public string RuneName { get; set; } = string.Empty;
-    public char AlphaChar { get; set; } = 'A';
+    [XmlIgnore]
+    public char AlphaCharLower => char.ToLower(AlphaChar);
+    public string RuneName { get; set; } = "----";
+    public char AlphaChar { get; set; } = '-';
     public int Value { get; set; } = 0;
     [JsonConverter(typeof(ColorJsonConverter))]
     public Color Color { get; set; } = Color.White;

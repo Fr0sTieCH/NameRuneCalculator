@@ -23,7 +23,7 @@ namespace NameRuneCalculator.Helpers
 
     public override object ProvideValue(IServiceProvider serviceProvider)
     {
-      return _resourceManager.GetString(Key, CultureInfo.CurrentUICulture) ?? $"[{Key}]";
+      return _resourceManager.GetString(Key, CultureInfo.DefaultThreadCurrentUICulture) ?? $"[{Key}]";
     }
   }
 }

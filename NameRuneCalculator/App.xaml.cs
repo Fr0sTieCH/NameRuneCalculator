@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NameRuneCalculator.Configuration;
+using NameRuneCalculator.Helpers;
 using NameRuneCalculator.View;
 using NameRuneCalculator.ViewModel;
 using System;
@@ -34,13 +35,12 @@ namespace NameRuneCalculator
 
       IConfiguration configuration = builder.Build();
       services.AddSingleton(configuration);
+      var defaultConfig = new NameRuneCalculatorConfig();
+      configuration.GetSection("NameRuneCalculatorConfig").Bind(defaultConfig);
 
-      var nameRuneConfig = new NameRuneCalculatorConfig();
-      configuration.GetSection("NameRuneCalculatorConfig").Bind(nameRuneConfig);
-      if (nameRuneConfig.UserDefinedRunes == null || nameRuneConfig.UserDefinedRunes.Length == 0)
-      {
-        nameRuneConfig.UserDefinedRunes = nameRuneConfig.DefaultRunes;
-      }
+      var nameRuneConfig = UserSettingsHelper.LoadUserSettings(defaultConfig);
+
+      LocalizationHelper.SwitchLanguage(nameRuneConfig.Language);
       services.AddSingleton(nameRuneConfig);
 
       // Register ViewModels
